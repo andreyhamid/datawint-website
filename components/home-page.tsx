@@ -268,11 +268,11 @@ export function HomePage() {
           <div>
             <span className="eyebrow">{es ? "PRODUCTOS Y PLATAFORMAS" : "PRODUCTS & PLATFORMS"}</span>
             <h2>{es ? "Tecnología para necesidades empresariales recurrentes." : "Technology for recurring business needs."}</h2>
-            <p>{es ? "Exploramos conceptos de producto alrededor de desafíos de gestión, datos e inteligencia de negocio." : "We are exploring product concepts for challenges in management, data, and business intelligence."}</p>
-            <Link className="button button-dark" href="/productos">{es ? "Explorar productos" : "Explore products"} <Arrow /></Link>
+            <p>{es ? "Productos en desarrollo para desafíos de gestión financiera, datos e inteligencia de negocio." : "Products in development for financial management, data, and business intelligence challenges."}</p>
+            <Link className="button button-dark" href="/productos">{es ? "Ver productos en desarrollo" : "View products in development"} <Arrow /></Link>
           </div>
           <div className="product-panel">
-            <div className="product-panel-head"><span className="panel-dot" /><span>{es ? "CONCEPTOS DE PRODUCTO DATAWINT" : "DATAWINT PRODUCT CONCEPTS"}</span></div>
+            <div className="product-panel-head"><span className="panel-dot" /><span>{es ? "PRODUCTOS EN DESARROLLO" : "PRODUCTS IN DEVELOPMENT"}</span></div>
             <div className="product-concept-list">
               {[
                 ["DataWint Financial Intelligence", es ? "Gestión financiera y reporting" : "Financial management and reporting"],
@@ -280,7 +280,7 @@ export function HomePage() {
                 ["DataWint Business Copilot", es ? "Consultas empresariales con IA" : "AI-powered business queries"],
               ].map(([name, description]) => <div className="product-concept" key={name}><span className="product-concept-mark">↗</span><span><strong>{name}</strong><small>{description}</small></span><span className="product-status">{es ? "EN EXPLORACIÓN" : "IN DISCOVERY"}</span></div>)}
             </div>
-            <p className="product-concept-note">{es ? "Conceptos en exploración; no disponibles comercialmente." : "Concepts in discovery; not commercially available."}</p>
+            <p className="product-concept-note">{es ? "En desarrollo; aún no disponibles comercialmente." : "In development; not yet commercially available."}</p>
           </div>
         </div>
       </section>
