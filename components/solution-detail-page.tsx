@@ -9,10 +9,9 @@ export function SolutionDetailPage({ solutionKey }: { solutionKey: string }) {
   const { language } = useSiteLanguage();
   const es = language === "es";
   const solution = solutions[solutionKey];
+  useScrollReveal();
   if (!solution) return null;
   const copy = (value: { es: string; en: string }) => value[language];
-
-  useScrollReveal();
 
   return (
     <>
