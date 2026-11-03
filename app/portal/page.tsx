@@ -7,7 +7,7 @@ const title = "Portal de clientes | DataWint";
 const description = "El portal de clientes de DataWint estará disponible próximamente. Mientras tanto, nuestro equipo te atiende directamente.";
 
 export const metadata: Metadata = {
-  title,
+  title: "Portal de clientes",
   description,
   robots: { index: false, follow: true },
   openGraph: { title, description, type: "website", locale: "es_PE" },

@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
 import { useSiteLanguage } from "@/components/site-provider";
+import { ContactForm } from "@/components/contact-form";
 import { siteConfig } from "@/config/site";
+import { productHref, productStatusLabels, products } from "@/content/products";
 
 type PageKey = "solutions" | "data" | "finance" | "software" | "cloud" | "industries" | "products" | "about" | "insights" | "contact";
 
@@ -96,14 +97,10 @@ const pages: Record<PageKey, {
   },
   products: {
     eyebrow: ["PRODUCTOS", "PRODUCTS"],
-    title: ["Construyendo soluciones para necesidades reales.", "Building solutions for real needs."],
-    intro: ["DataWint está explorando herramientas y plataformas que respondan a desafíos empresariales recurrentes. Compartiremos novedades cuando haya productos listos para presentar.", "DataWint is exploring tools and platforms for recurring business challenges. We will share updates when products are ready to introduce."],
-    items: [
-      { title: ["DataWint Financial Intelligence", "DataWint Financial Intelligence"], text: ["Concepto en exploración para reunir presupuestos, flujo de caja, rentabilidad y reporting gerencial.", "Concept in discovery to bring together budgets, cash flow, profitability, and management reporting."] },
-      { title: ["DataWint Data Platform", "DataWint Data Platform"], text: ["Concepto en exploración para integrar fuentes, monitorear procesos ETL y mejorar la calidad de datos.", "Concept in discovery to integrate sources, monitor ETL processes, and improve data quality."] },
-      { title: ["DataWint Business Copilot", "DataWint Business Copilot"], text: ["Concepto en exploración para consultar indicadores y analizar información empresarial con IA.", "Concept in discovery to query business metrics and analyze company information with AI."] },
-    ],
-    closing: ["¿Tienes un desafío recurrente que podría resolverse con una herramienta digital? Conversemos.", "Have a recurring challenge that could be solved with a digital tool? Let’s talk."],
+    title: ["Un ecosistema de productos SaaS para decidir mejor.", "A SaaS product ecosystem for better decisions."],
+    intro: ["DataWint está desarrollando tres productos pensados para compartir una misma base de datos, identidad y seguridad. Ninguno está disponible todavía: compartiremos novedades a medida que avancen.", "DataWint is developing three products designed to share the same data, identity, and security foundation. None is available yet; we will share updates as they progress."],
+    items: products.map((product) => ({ title: [product.name, product.name] as [string, string], text: [product.summary.es, product.summary.en] as [string, string] })),
+    closing: ["¿Te interesa alguno de estos productos o tienes un desafío recurrente que podría resolverse con una herramienta digital? Conversemos.", "Interested in one of these products, or have a recurring challenge that a digital tool could solve? Let’s talk."],
   },
   about: {
     eyebrow: ["NOSOTROS", "ABOUT US"],
@@ -140,52 +137,6 @@ const pages: Record<PageKey, {
 
 const solutionHref = ["/soluciones/data-analytics", "/soluciones/erp-enterprise-systems", "/soluciones/financial-technology", "/soluciones/software-ai", "/soluciones/cloud-infrastructure", "/soluciones/cybersecurity-compliance"];
 
-function ContactForm({ language }: { language: "es" | "en" }) {
-  const [sent, setSent] = useState(false);
-  const es = language === "es";
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const subject = encodeURIComponent(`${es ? "Consulta desde DataWint" : "Inquiry from DataWint"} — ${formData.get("name")}`);
-    const body = encodeURIComponent([
-      `${es ? "Nombre" : "Name"}: ${formData.get("name")}`,
-      `${es ? "Correo" : "Email"}: ${formData.get("email")}`,
-      `${es ? "Empresa" : "Company"}: ${formData.get("company")}`,
-      `${es ? "Teléfono" : "Phone"}: ${formData.get("phone")}`,
-      `${es ? "Industria" : "Industry"}: ${formData.get("industry")}`,
-      `${es ? "División de interés" : "Division of interest"}: ${formData.get("division")}`,
-      "",
-      `${es ? "Mensaje" : "Message"}:`,
-      `${formData.get("message")}`,
-    ].join("\n"));
-    window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`;
-    setSent(true);
-  }
-
-  return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <div className="form-row">
-        <label>{es ? "Nombre" : "Name"}<input name="name" autoComplete="name" required /></label>
-        <label>{es ? "Empresa" : "Company"}<input name="company" autoComplete="organization" required /></label>
-      </div>
-      <div className="form-row">
-        <label>{es ? "Correo electrónico" : "Email address"}<input name="email" type="email" autoComplete="email" required /></label>
-        <label>{es ? "Teléfono" : "Phone"}<input name="phone" type="tel" inputMode="tel" autoComplete="tel" pattern="[0-9+() -]{7,20}" title={es ? "Ingresa un teléfono válido." : "Enter a valid phone number."} required /></label>
-      </div>
-      <div className="form-row">
-        <label>{es ? "Industria" : "Industry"}<select name="industry" required defaultValue=""><option value="" disabled>{es ? "Selecciona una industria" : "Select an industry"}</option>{(es ? ["Agroindustria y manufactura", "Retail y distribución", "Servicios financieros", "Comercio y empresas corporativas", "Logística y operaciones", "Empresas de servicios"] : ["Agribusiness & manufacturing", "Retail & distribution", "Financial services", "Commerce & corporate business", "Logistics & operations", "Service organizations"]).map((industry) => <option key={industry}>{industry}</option>)}</select></label>
-        <label>{es ? "División de interés" : "Division of interest"}<select name="division" required defaultValue=""><option value="" disabled>{es ? "Selecciona una división" : "Select a division"}</option>{["Data & Analytics", "ERP & Enterprise Systems", "Financial Technology", "Software & AI", "Cloud & Infrastructure", "Cybersecurity & Compliance"].map((division) => <option key={division}>{division}</option>)}</select></label>
-      </div>
-      <label>{es ? "Descripción del proyecto" : "Project description"}<textarea name="message" rows={5} required /></label>
-      <button className="button button-dark" type="submit">{es ? "Abrir correo para enviar" : "Open email to send"} <span aria-hidden="true">↗</span></button>
-      <p className="form-note">{sent
-        ? (es ? "Se abrió tu aplicación de correo para que puedas enviar el mensaje." : "Your email app opened so you can send your message.")
-        : (es ? "El formulario prepara un correo en tu aplicación predeterminada; no almacena tus datos en este sitio." : "This form prepares an email in your default email app; it does not store your data on this site.")}</p>
-    </form>
-  );
-}
-
 export function ContentPage({ pageKey }: { pageKey: string }) {
   const { language } = useSiteLanguage();
   const content = pages[pageKey as PageKey];
@@ -221,16 +172,17 @@ export function ContentPage({ pageKey }: { pageKey: string }) {
       ) : (
         <section className="section content-list-section">
           <div className="page-container">
-            <div className="content-grid">
+            <div className={`content-grid${pageKey === "products" ? " content-grid-products" : ""}`}>
               {content.items.map((item, index) => {
-                const href = pageKey === "solutions" ? solutionHref[index] : undefined;
+                const product = pageKey === "products" ? products[index] : undefined;
+                const href = pageKey === "solutions" ? solutionHref[index] : product ? productHref(product) : undefined;
                 const cardContent = (
                   <>
                     <span className="content-card-number">0{index + 1}</span>
                     <h2>{item.title[es ? 0 : 1]}</h2>
-                    {pageKey === "products" && <span className="content-card-status">{es ? "EN EXPLORACIÓN" : "IN DISCOVERY"}</span>}
+                    {product && <span className="content-card-status content-card-status-dev">{productStatusLabels[product.status][language]}</span>}
                     <p>{item.text[es ? 0 : 1]}</p>
-                    {href && <span className="card-link">{es ? "Explorar división" : "Explore division"} <span aria-hidden="true">→</span></span>}
+                    {href && <span className="card-link">{product ? (es ? "Ver producto" : "View product") : (es ? "Explorar división" : "Explore division")} <span aria-hidden="true">→</span></span>}
                   </>
                 );
                 return (
