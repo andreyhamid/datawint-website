@@ -1,0 +1,15 @@
+export const pageSlugs: Record<string, string> = {
+  soluciones: "solutions",
+  "soluciones/data-analytics": "data",
+  "soluciones/erp-enterprise-systems": "erp",
+  "soluciones/financial-technology": "finance",
+  "soluciones/software-ai": "software",
+  "soluciones/cloud-infrastructure": "cloud",
+  "soluciones/cloud-security": "cloud",
+  "soluciones/cybersecurity-compliance": "security",
+  industrias: "industries",
+  productos: "products",
+  nosotros: "about",
+  recursos: "insights",
+  contacto: "contact",
+};
