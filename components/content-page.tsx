@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { useSiteLanguage } from "@/components/site-provider";
+import { siteConfig } from "@/config/site";
 
 type PageKey = "solutions" | "data" | "finance" | "software" | "cloud" | "industries" | "products" | "about" | "insights" | "contact";
 
@@ -158,7 +159,7 @@ function ContactForm({ language }: { language: "es" | "en" }) {
       `${es ? "Mensaje" : "Message"}:`,
       `${formData.get("message")}`,
     ].join("\n"));
-    window.location.href = `mailto:asilva@datawint.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`;
     setSent(true);
   }
 
@@ -211,8 +212,8 @@ export function ContentPage({ pageKey }: { pageKey: string }) {
               <span className="eyebrow">{es ? "CUÉNTANOS MÁS" : "TELL US MORE"}</span>
               <h2>{es ? "Una conversación puede ser el primer paso." : "A conversation can be the first step."}</h2>
               <p>{content.closing[es ? 0 : 1]}</p>
-              <a className="contact-detail" href="mailto:asilva@datawint.com"><span className="contact-detail-icon">✳</span><span><small>EMAIL</small><strong>asilva@datawint.com</strong></span></a>
-              <a className="contact-detail" href="https://wa.me/51953494818?text=Hola%2C%20quiero%20conocer%20las%20soluciones%20de%20DataWint." target="_blank" rel="noreferrer"><span className="contact-detail-icon">↗</span><span><small>WHATSAPP</small><strong>+51 953 494 818</strong></span></a>
+              <a className="contact-detail" href={`mailto:${siteConfig.contactEmail}`}><span className="contact-detail-icon">✳</span><span><small>EMAIL</small><strong>{siteConfig.contactEmail}</strong></span></a>
+              <a className="contact-detail" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer"><span className="contact-detail-icon">↗</span><span><small>WHATSAPP</small><strong>{siteConfig.phoneDisplay}</strong></span></a>
             </div>
             <ContactForm language={language} />
           </div>

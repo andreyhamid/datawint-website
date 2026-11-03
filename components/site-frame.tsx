@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useSiteLanguage } from "@/components/site-provider";
 import { SolutionsMegaMenu } from "@/components/solutions-mega-menu";
+import { PortalIcon, PortalLink } from "@/components/portal-link";
+import { siteConfig } from "@/config/site";
 
-const whatsappUrl =
-  "https://wa.me/51953494818?text=Hola%2C%20quiero%20conocer%20las%20soluciones%20de%20DataWint.";
+const { whatsappUrl, contactEmail, phoneDisplay } = siteConfig;
 
 export function SiteFrame({ children }: { children: ReactNode }) {
   const { language, toggleLanguage } = useSiteLanguage();
@@ -78,6 +79,10 @@ export function SiteFrame({ children }: { children: ReactNode }) {
             <Link className="button button-small nav-cta" href="/contacto" onClick={() => setMenuOpen(false)}>
               {isEs ? "Hablemos" : "Let’s talk"} <span aria-hidden="true">↗</span>
             </Link>
+            <PortalLink className="button button-small nav-portal" onClick={() => setMenuOpen(false)} ariaLabel={isEs ? "Portal de clientes" : "Client portal"}>
+              <PortalIcon />
+              <span className="nav-portal-label">{isEs ? <>Portal<span className="nav-portal-extra"> de clientes</span></> : <>Client<span className="nav-portal-extra"> portal</span></>}</span>
+            </PortalLink>
           </nav>
         </div>
       </header>
@@ -120,11 +125,12 @@ export function SiteFrame({ children }: { children: ReactNode }) {
             <Link href="/nosotros">{isEs ? "Nosotros" : "About us"}</Link>
             <Link href="/recursos">{isEs ? "Recursos" : "Insights"}</Link>
             <Link href="/contacto">{isEs ? "Contacto" : "Contact"}</Link>
+            <PortalLink>{isEs ? "Portal de clientes" : "Client portal"}</PortalLink>
           </div>
           <div className="footer-contact">
             <span className="eyebrow">{isEs ? "¿Hablamos de tu próximo reto?" : "Ready to discuss your next challenge?"}</span>
-            <a href="mailto:asilva@datawint.com">asilva@datawint.com</a>
-            <a href={whatsappUrl} target="_blank" rel="noreferrer">+51 953 494 818 <span aria-hidden="true">↗</span></a>
+            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer">{phoneDisplay} <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         <div className="footer-bottom">

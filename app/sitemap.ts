@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { pageSlugs } from "@/components/page-slugs";
+import { siteConfig } from "@/config/site";
 
-const baseUrl = "https://datawint.com";
+const baseUrl = siteConfig.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

@@ -854,3 +854,39 @@ a.content-card:hover { transform: translateY(-3px); border-color: #b6dce1; box-s
   .orbit-inner { animation: none; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* ---------- Portal de clientes (acceso en navegación) ---------- */
+.nav-portal {
+  gap: 8px; white-space: nowrap;
+  border-color: rgba(225,237,250,.28); background: transparent; color: #d7e2ee;
+}
+.nav-portal:hover { border-color: rgba(225,237,250,.6); background: rgba(255,255,255,.06); color: #fff; }
+.primary-navigation > .nav-portal { color: #d7e2ee; font-size: 12px; font-weight: 700; }
+.primary-navigation > .nav-portal:hover { color: #fff; }
+.portal-icon { width: 15px; height: 15px; flex: 0 0 auto; }
+.nav-cta + .nav-portal { margin-left: -14px; }
+@media (max-width: 1180px) and (min-width: 801px) {
+  .nav-portal-extra { display: none; }
+}
+@media (max-width: 800px) {
+  .nav-cta + .nav-portal { margin: 10px 0 0; }
+  .primary-navigation > .nav-portal { min-height: 45px; justify-content: center; border: 1px solid rgba(225,237,250,.28); font-size: 13px; }
+}
+@media (max-width: 560px) {
+  .primary-navigation > .nav-portal { min-height: 54px; font-size: 16px; }
+}
+
+/* ---------- Estados de producto / portal ---------- */
+.product-status {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; margin: 0 0 16px;
+  padding: 6px 11px; border-radius: 99px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  border: 1px solid rgba(240,190,90,.35); background: rgba(240,190,90,.1); color: #f3cf86;
+}
+.product-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.product-status-soon { border-color: rgba(105,214,224,.35); background: rgba(105,214,224,.1); color: #8fe0e8; }
+.inner-hero .hero-actions .button { margin-top: 0; }
+.portal-hero .inner-hero-orb .portal-icon { width: 92px; height: 92px; color: rgba(86,206,217,.28); }
+.portal-closing { margin-top: 0; }
+@media (max-width: 560px) {
+  .product-status { font-size: 12px; }
+}

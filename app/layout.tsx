@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SiteFrame } from "@/components/site-frame";
 import { SiteProvider } from "@/components/site-provider";
+import { siteConfig } from "@/config/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     "DataWint conecta sistemas empresariales, datos, finanzas, software, cloud e inteligencia para transformar operaciones.",
   keywords: ["Data Engineering", "SAP Perú", "integración ERP", "automatización financiera", "software empresarial", "consultoría cloud", "ciberseguridad empresarial", "inteligencia artificial"],
   applicationName: "DataWint",
-  metadataBase: new URL("https://datawint.com"),
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
     locale: "es_PE",
@@ -33,11 +34,11 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "DataWint",
-          url: "https://datawint.com",
-          logo: "https://datawint.com/datawint-logo.png",
+          url: siteConfig.url,
+          logo: `${siteConfig.url}/datawint-logo.png`,
           description: "Tecnología, datos e inteligencia para transformar empresas.",
-          email: "asilva@datawint.com",
-          telephone: "+51 953 494 818",
+          email: siteConfig.contactEmail,
+          telephone: siteConfig.phoneDisplay,
           areaServed: "Peru",
           knowsAbout: ["Data Engineering", "Enterprise Systems", "Financial Technology", "Software Development", "Cloud Infrastructure", "Cybersecurity"],
         }).replace(/</g, "\\u003c") }} />
